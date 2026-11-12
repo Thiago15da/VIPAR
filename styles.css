@@ -171,3 +171,11 @@ dialog .inline-status{color:#15664c;font-weight:700;min-height:1.4em;margin-top:
   .hero h2{font-size:2.2rem}
   .form-grid,.summary-grid{grid-template-columns:1fr}
 }
+.open-arrow{display:inline-block;width:10px;height:10px;color:var(--blue);position:relative}
+.open-arrow::before{content:"";position:absolute;inset:0 0 auto auto;width:7px;height:7px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
+.open-arrow::after{content:"";position:absolute;top:4px;left:-1px;width:12px;height:1.5px;background:currentColor;transform:rotate(-45deg)}
+.roadmap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;list-style:none;margin:0;padding:0}
+.roadmap li{min-width:0;display:grid;gap:6px;border-top:2px solid #8aafd8;padding-top:6px}
+.roadmap strong{font-size:.77rem;overflow-wrap:anywhere}
+.roadmap .badge{font-size:.67rem}
+@media(max-width:570px){.stage .form-grid{grid-template-columns:1fr}}

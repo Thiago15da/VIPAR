@@ -129,7 +129,7 @@ function renderWork() {
     return `<button class="work-row" data-open="${escape(project.id)}" type="button">
       <span><strong>${escape(project.name)}</strong><small>${escape(meta)}</small></span>
       ${badge(stage,stage === 'Entregada' ? 'done' : stage === 'Presupuesto' ? 'wait' : '')}
-      <span class="open-arrow" aria-hidden="true">↗</span>
+      <span class="open-arrow" aria-hidden="true"></span>
     </button>`;
   }).join('') || '<p class="empty">No hay obras para esta búsqueda.</p>';
 }
@@ -160,6 +160,7 @@ function openProject(id, section = 'resumen') {
 
 function showTab(section) {
   tab = section;
+  $project.scrollTop = 0;
   for (const control of byId('tabs').querySelectorAll('button')) {
     control.setAttribute('aria-pressed', String(control.dataset.tab === tab));
   }
@@ -177,6 +178,7 @@ function renderSummary() {
       <div class="detail-card">${badge(stageOf(active), stage ? '' : 'done')}<strong>${approved ? escape(stage?.owner || 'Sin responsable') : 'Equipo comercial'}</strong>
       <p class="muted">${!stage ? 'Obra completada' : approved ? dateText(stage.date) : 'Preparar o confirmar presupuesto'}</p></div>
     </div>
+    <ol class="roadmap" aria-label="Avance de la obra">${active.stages.map((item,i) => `<li><strong>${item.name}</strong>${stageStatus(item,i)}</li>`).join('')}</ol>
     <div class="detail-actions"><button class="button" data-tab="presupuesto" type="button">Ver presupuesto</button><button class="secondary" data-tab="seguimiento" type="button">Ver seguimiento</button></div>`;
 }
 
@@ -200,6 +202,7 @@ function renderBudget() {
 
 function stageStatus(stage, index) {
   if (stage.done) return badge('Completada','done');
+  if (active.status !== 'Aprobado') return badge('Pendiente','neutral');
   const ready = index === active.stages.findIndex(item => !item.done);
   if (!ready) return badge('Pendiente','neutral');
   return stage.date && stage.date < DEMO_DATE ? badge('Vencida','late') : badge('Siguiente');
