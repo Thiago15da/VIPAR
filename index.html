@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es-PY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#071d36">
+  <meta name="description" content="Muestra de NovaTec Engineering para VIPAR S.A. Presupuestos y seguimiento de obras.">
+  <title>VIPAR | Panel de obras</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#panel">Ir al contenido</a>
+  <aside class="sidebar" aria-label="Navegación">
+    <a class="brand" href="#panel"><img src="logo.png" width="154" height="36" alt="VIPAR S.A."><span>GESTIÓN DE OBRAS</span></a>
+    <nav>
+      <a href="#panel" class="active"><span aria-hidden="true">◫</span> Resumen</a>
+      <a href="#obras"><span aria-hidden="true">▤</span> Obras</a>
+      <a href="#agenda"><span aria-hidden="true">◷</span> Agenda</a>
+    </nav>
+    <div class="sidebar-foot"><strong>NovaTec Engineering</strong><span>Demo para VIPAR</span></div>
+  </aside>
+  <main id="panel">
+    <header class="topbar">
+      <div><p class="eyebrow">OPERACIONES</p><h1>Panel de obras</h1></div>
+      <div class="top-actions"><button class="text-btn" id="reset" type="button">Reiniciar demo</button><button class="button" id="new" type="button">＋ Nueva obra</button></div>
+    </header>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">MUESTRA INTERACTIVA · DATOS FICTICIOS</p>
+        <h2 id="hero-title">Del presupuesto<br>a la instalación.</h2>
+        <p>Medidas, fechas y responsables de cada obra en una misma ficha.</p>
+        <button class="button hero-button" id="try" type="button">Abrir obra de ejemplo <span aria-hidden="true">↗</span></button>
+      </div>
+      <figure><img src="obra.webp" alt="Fachada vidriada de una obra del portafolio de VIPAR" width="740" height="470"><figcaption>Imagen del portafolio de VIPAR</figcaption></figure>
+    </section>
+    <section id="stats" class="stats" aria-label="Indicadores"></section>
+    <div class="columns">
+      <section class="panel work" id="obras" aria-labelledby="work-title">
+        <header class="section-head"><div><h2 id="work-title">Obras</h2><p>Consultá la etapa y el próximo paso.</p></div><label class="sr-only" for="filter">Filtrar por etapa</label><select id="filter"></select></header>
+        <label for="search" class="sr-only">Buscar obra o cliente</label><input id="search" type="search" placeholder="Buscar obra, cliente o ciudad">
+        <div class="work-list" id="work-list"></div>
+      </section>
+      <section class="panel agenda" id="agenda" aria-labelledby="agenda-title">
+        <header class="section-head"><div><h2 id="agenda-title">Próximas tareas</h2><p>Según las fechas de la muestra.</p></div></header>
+        <div id="tasks"></div>
+      </section>
+    </div>
+    <footer>Propuesta de NovaTec Engineering para VIPAR S.A. · Los cambios se guardan en este navegador.</footer>
+  </main>
+
+  <dialog id="project" aria-labelledby="project-title">
+    <header class="dialog-header"><div><p id="project-code" class="eyebrow"></p><h2 id="project-title"></h2><p id="project-meta"></p></div><button id="close-project" class="close" type="button" aria-label="Cerrar ficha">×</button></header>
+    <nav id="tabs" class="tabs" aria-label="Secciones de la obra"><button data-tab="resumen" type="button">Resumen</button><button data-tab="presupuesto" type="button">Presupuesto</button><button data-tab="seguimiento" type="button">Seguimiento</button></nav>
+    <div id="detail" class="detail"></div>
+  </dialog>
+
+  <dialog id="create" aria-labelledby="create-title">
+    <header class="dialog-header"><div><p class="eyebrow">OBRAS</p><h2 id="create-title">Nueva obra</h2></div><button id="close-create" class="close" type="button" aria-label="Cerrar nueva obra">×</button></header>
+    <form id="create-form" class="detail">
+      <div class="form-grid">
+        <label>Nombre de la obra<input name="name" required maxlength="80" placeholder="Ej. Oficina Ceibo"></label>
+        <label>Cliente<input name="client" required maxlength="80" placeholder="Ej. Empresa Ceibo"></label>
+        <label>Ciudad<input name="city" required maxlength="55" placeholder="Ej. Ñemby"></label>
+        <label>Tipo de trabajo<select name="type"><option>Mamparas</option><option>Fachadas</option><option>Carpintería de aluminio</option><option>Box de baño</option><option>Cielos rasos</option><option>Otro</option></select></label>
+      </div>
+      <label>Alcance del trabajo<textarea name="scope" maxlength="420" rows="3" placeholder="Ej. Tres mamparas con perfilería de aluminio."></textarea></label>
+      <button class="button" type="submit">Crear obra</button>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>
